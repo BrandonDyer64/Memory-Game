@@ -13,6 +13,7 @@ export default class Card extends Component {
   isOpen() {
     return this.refs.flipContainer.classList.contains('flip-open')
   }
+
   render() {
     return (
       <div style={{ margin: '10px' }}>
@@ -22,13 +23,16 @@ export default class Card extends Component {
           onClick={event => this.toggle()}
         >
           <div className='flipper'>
-            <div className='flip-front'>
+            {/* Back */}
+            <div className='flip-back'>
               <div className='card'>
                 <div className='card-back' />
               </div>
             </div>
+            {/* /Back */}
 
-            <div className='flip-back'>
+            {/* Front */}
+            <div className='flip-front'>
               <div className='card'>
                 <div className='card-front'>
                   <span className='suit' style={{ textAlign: 'left' }}>
@@ -41,6 +45,7 @@ export default class Card extends Component {
                 </div>
               </div>
             </div>
+            {/* /Front */}
           </div>
         </div>
       </div>

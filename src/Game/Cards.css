@@ -67,8 +67,8 @@
 }
 
 .flip-container,
-.flip-front,
-.flip-back {
+.flip-back,
+.flip-front {
   width: var(--card-width);
   height: var(--card-height);
 }
@@ -82,8 +82,8 @@
 }
 
 /* hide back of pane during swap */
-.flip-front,
-.flip-back {
+.flip-back,
+.flip-front {
   backface-visibility: hidden;
 
   position: absolute;
@@ -92,13 +92,13 @@
 }
 
 /* front pane, placed above back */
-.flip-front {
+.flip-back {
   z-index: 2;
   /* for firefox 31 */
   transform: rotateY(0deg);
 }
 
 /* back, initially hidden pane */
-.flip-back {
+.flip-front {
   transform: rotateY(180deg);
 }
