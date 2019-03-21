@@ -23,7 +23,7 @@ export default class Card extends Component {
                   <span className='suit' style={{ textAlign: 'left' }}>
                     ♦
                   </span>
-                  <span style={{ fontSize: '2em' }}>{this.props.number}</span>
+                  <span style={{ fontSize: '2em' }}>{this.props.value}</span>
                   <span className='suit' style={{ textAlign: 'right' }}>
                     ♦
                   </span>

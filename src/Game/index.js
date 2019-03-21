@@ -11,7 +11,7 @@ export default class Game extends Component {
     const cardNumbers = [...range(0, 12), ...range(0, 12)]
     shuffleArray(cardNumbers)
     for (var i = 0; i < 24; i++) {
-      cards.push(<Card number={cardNumbers[i]} />)
+      cards.push(<Card value={String.fromCharCode(65 + cardNumbers[i])} />)
     }
     this.state = {
       cards
