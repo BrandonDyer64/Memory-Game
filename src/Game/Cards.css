@@ -11,6 +11,8 @@
   border-radius: 10px;
   padding: 15px;
   cursor: pointer;
+  user-select: none;
+  transition: background-color 0.5s linear;
 }
 
 @media only screen and (max-width: 950px) {
@@ -60,7 +62,7 @@
   perspective: 1000px;
 }
 /* flip the pane when hovered */
-.flip-container.hover .flipper {
+.flip-container.flip-open .flipper {
   transform: rotateY(180deg);
 }
 

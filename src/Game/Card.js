@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 
 export default class Card extends Component {
+  toggle() {
+    this.refs.flipContainer.classList.toggle('flip-open')
+  }
+  close() {
+    this.refs.flipContainer.classList.remove('flip-open')
+  }
+  open() {
+    this.refs.flipContainer.classList.add('flip-open')
+  }
+  isOpen() {
+    return this.refs.flipContainer.classList.contains('flip-open')
+  }
   render() {
     return (
       <div style={{ margin: '10px' }}>
         <div
           className='flip-container'
-          onClick={event => {
-            event.currentTarget.classList.toggle('hover')
-          }}
+          ref='flipContainer'
+          onClick={event => this.toggle()}
         >
           <div className='flipper'>
             <div className='flip-front'>
