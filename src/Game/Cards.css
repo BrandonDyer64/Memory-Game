@@ -19,6 +19,10 @@
   opacity: 0;
 }
 
+.disable .card {
+  cursor: default;
+}
+
 @media only screen and (max-width: 950px) {
   :root {
     --card-width: 80px;

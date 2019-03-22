@@ -10,6 +10,8 @@ export default class Card extends Component {
       symbol: symbols[props.rawValue % symbols.length]
     }
   }
+
+  // Opening
   toggle() {
     this.refs.flipContainer.classList.toggle('flip-open')
     if (this.isOpen()) {
@@ -29,6 +31,8 @@ export default class Card extends Component {
   isOpen() {
     return this.refs.flipContainer.classList.contains('flip-open')
   }
+
+  // Enabling
   disable() {
     this.refs.flipContainer.classList.add('disable')
   }
