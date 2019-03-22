@@ -1,0 +1,16 @@
+.btn {
+  font-family: 'Signika';
+  font-weight: bold;
+  background-color: white;
+  border: none;
+  border-bottom: 3px solid lightgray;
+  border-radius: 4px;
+  padding: 7px 12px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.1s linear;
+}
+
+.btn:hover {
+  background-color: var(--clouds);
+}

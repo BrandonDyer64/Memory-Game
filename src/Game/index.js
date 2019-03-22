@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+
+import Navbar from '../Components/Navbar'
 import Card from './Card'
+
 import { range, shuffleArray } from '../Utils'
+import config from '../config.json'
+
 import './GameBoard.css'
 import './Cards.css'
 
@@ -8,20 +13,68 @@ export default class Game extends Component {
   constructor(props) {
     super(props)
     const cards = []
-    const cardNumbers = [...range(0, 12), ...range(0, 12)]
+    const cardNumbers = [
+      ...range(0, config.cards / 2),
+      ...range(0, config.cards / 2)
+    ]
     shuffleArray(cardNumbers)
-    for (var i = 0; i < 24; i++) {
-      cards.push(<Card value={String.fromCharCode(65 + cardNumbers[i])} />)
+    this.state = { cardNumbers }
+    this.cardCloseCallbacks = []
+    window.openAllCards = () => {
+      this.openAllCards()
     }
-    this.state = {
-      cards
+    window.closeAllCards = () => {
+      this.closeAllCards()
     }
+  }
+
+  resetGame() {
+    this.closeAllCards()
+    setTimeout(() => {
+      const cardNumbers = this.state.cardNumbers
+      shuffleArray(cardNumbers)
+      this.setState({ cardNumbers })
+    }, 600)
+  }
+
+  closeAllCards() {
+    for (let i in this.refs) {
+      setTimeout(() => {
+        this.refs[i].close()
+      }, 20 * i)
+    }
+  }
+
+  openAllCards() {
+    for (let i in this.refs) {
+      this.refs[i].open()
+    }
+  }
+
+  onCardOpened() {}
+
+  getCards() {
+    const cards = []
+    for (var i = 0; i < config.cards; i++) {
+      cards.push(
+        <Card
+          key={i}
+          ref={i}
+          value={String.fromCharCode(65 + this.state.cardNumbers[i])}
+        />
+      )
+      console.log(this.cardCloseCallbacks[i])
+    }
+    this.cards = cards
+    return cards
   }
 
   render() {
     return (
       <div className='game-board'>
-        <div className='card-container'>{this.state.cards}</div>
+        <Navbar startOver={() => this.resetGame()} />
+        <div className='card-container'>{this.getCards()}</div>
+        <div />
       </div>
     )
   }

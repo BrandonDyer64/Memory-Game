@@ -1,6 +1,7 @@
 :root {
   --primary: var(--purple);
   --primary-dark: var(--purple-dark);
+  --background: var(--teal-dark);
 }
 
 .App {

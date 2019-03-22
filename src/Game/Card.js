@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import CardBackImage from './cardback.png'
 
 export default class Card extends Component {
+  constructor(props) {
+    super(props)
+  }
   toggle() {
     this.refs.flipContainer.classList.toggle('flip-open')
   }
@@ -12,6 +16,15 @@ export default class Card extends Component {
   }
   isOpen() {
     return this.refs.flipContainer.classList.contains('flip-open')
+  }
+  disable() {
+    this.refs.flipContainer.classList.add('disable')
+  }
+  enable() {
+    this.refs.flipContainer.classList.remove('disable')
+  }
+  isEnabled() {
+    return !this.refs.flipContainer.classList.contains('disable')
   }
 
   render() {
@@ -26,7 +39,9 @@ export default class Card extends Component {
             {/* Back */}
             <div className='flip-back'>
               <div className='card'>
-                <div className='card-back' />
+                <div className='card-back'>
+                  <img src={CardBackImage} />
+                </div>
               </div>
             </div>
             {/* /Back */}

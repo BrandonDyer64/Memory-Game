@@ -1,5 +1,5 @@
 export function range(start, end) {
-  var array = new Array()
+  var array = []
   for (var i = start; i < end; i++) {
     array.push(i)
   }

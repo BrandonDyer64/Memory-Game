@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,700');
+@import url('https://fonts.googleapis.com/css?family=Signika:700,400,600');
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: 'Signika', 'Poppins', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,8 +20,12 @@ code {
 :root {
   --red: #e74c3c;
   --red-dark: #c0392b;
+  --green: #2ecc71;
+  --green-dark: #27ae60;
   --teal: #1abc9c;
   --teal-dark: #16a085;
   --purple: #9b59b6;
   --purple-dark: #8e44ad;
+  --clouds: #ecf0f1;
+  --clouds-dark: #bdc3c7;
 }
