@@ -36,6 +36,7 @@ export default class Game extends Component {
       const cardNumbers = this.state.cardNumbers
       shuffleArray(cardNumbers)
       this.setState({ cardNumbers, score: 10 })
+      this.numDisabledCards = 0
     }, 600)
   }
 
