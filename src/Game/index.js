@@ -41,6 +41,7 @@ export default class Game extends Component {
     for (let i in this.refs) {
       setTimeout(() => {
         this.refs[i].close()
+        this.refs[i].enable()
       }, 20 * i)
     }
   }
@@ -51,16 +52,21 @@ export default class Game extends Component {
     }
   }
 
-  onCardOpened() {}
+  onCardOpened(cardNum) {}
+
+  onCardClosed(cardNum) {}
 
   getCards() {
     const cards = []
-    for (var i = 0; i < config.cards; i++) {
+    for (let i = 0; i < config.cards; i++) {
       cards.push(
         <Card
           key={i}
           ref={i}
           value={String.fromCharCode(65 + this.state.cardNumbers[i])}
+          rawValue={this.state.cardNumbers[i]}
+          onOpen={() => this.onCardOpened(i)}
+          onClose={() => this.onCardClosed(i)}
         />
       )
       console.log(this.cardCloseCallbacks[i])

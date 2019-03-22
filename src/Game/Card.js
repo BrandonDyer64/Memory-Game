@@ -1,18 +1,30 @@
 import React, { Component } from 'react'
 import CardBackImage from './cardback.png'
 
+const symbols = ['♠', '♥', '♣', '♦']
+
 export default class Card extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      symbol: symbols[props.rawValue % symbols.length]
+    }
   }
   toggle() {
     this.refs.flipContainer.classList.toggle('flip-open')
+    if (this.isOpen()) {
+      this.props.onOpen()
+    } else {
+      this.props.onClose()
+    }
   }
   close() {
     this.refs.flipContainer.classList.remove('flip-open')
+    this.props.onClose()
   }
   open() {
     this.refs.flipContainer.classList.add('flip-open')
+    this.props.onOpen()
   }
   isOpen() {
     return this.refs.flipContainer.classList.contains('flip-open')
@@ -51,11 +63,11 @@ export default class Card extends Component {
               <div className='card'>
                 <div className='card-front'>
                   <span className='suit' style={{ textAlign: 'left' }}>
-                    ♦
+                    {symbols[this.props.rawValue % symbols.length]}
                   </span>
                   <span style={{ fontSize: '2em' }}>{this.props.value}</span>
                   <span className='suit' style={{ textAlign: 'right' }}>
-                    ♦
+                    {symbols[this.props.rawValue % symbols.length]}
                   </span>
                 </div>
               </div>
