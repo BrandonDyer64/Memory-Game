@@ -1,14 +1,14 @@
 {
-  "main.css": "/grhomework/static/css/main.5ed80a67.chunk.css",
-  "main.js": "/grhomework/static/js/main.b2df11e2.chunk.js",
-  "main.js.map": "/grhomework/static/js/main.b2df11e2.chunk.js.map",
+  "main.css": "/grhomework/static/css/main.4e47d047.chunk.css",
+  "main.js": "/grhomework/static/js/main.685f02c9.chunk.js",
+  "main.js.map": "/grhomework/static/js/main.685f02c9.chunk.js.map",
   "runtime~main.js": "/grhomework/static/js/runtime~main.3c562aa8.js",
   "runtime~main.js.map": "/grhomework/static/js/runtime~main.3c562aa8.js.map",
-  "static/js/2.e42c059a.chunk.js": "/grhomework/static/js/2.e42c059a.chunk.js",
-  "static/js/2.e42c059a.chunk.js.map": "/grhomework/static/js/2.e42c059a.chunk.js.map",
+  "static/js/2.15a857bd.chunk.js": "/grhomework/static/js/2.15a857bd.chunk.js",
+  "static/js/2.15a857bd.chunk.js.map": "/grhomework/static/js/2.15a857bd.chunk.js.map",
   "index.html": "/grhomework/index.html",
-  "precache-manifest.9c46051c8c48db35cd049eccb08082fa.js": "/grhomework/precache-manifest.9c46051c8c48db35cd049eccb08082fa.js",
+  "precache-manifest.734c84a618ac3e878cf8b74c24e46b07.js": "/grhomework/precache-manifest.734c84a618ac3e878cf8b74c24e46b07.js",
   "service-worker.js": "/grhomework/service-worker.js",
-  "static/css/main.5ed80a67.chunk.css.map": "/grhomework/static/css/main.5ed80a67.chunk.css.map",
-  "static/media/logo.svg": "/grhomework/static/media/logo.5d5d9eef.svg"
+  "static/css/main.4e47d047.chunk.css.map": "/grhomework/static/css/main.4e47d047.chunk.css.map",
+  "static/media/cardback.png": "/grhomework/static/media/cardback.ef188c28.png"
 }
