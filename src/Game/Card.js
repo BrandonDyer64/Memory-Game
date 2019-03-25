@@ -41,16 +41,15 @@ export default class Card extends Component {
     })
   }
 
-  // Flips card to back
-  close() {
-    this.setState({ open: false })
-    this.props.onClose()
-  }
-
-  // Flips card to front
-  open() {
-    this.setState({ open: true })
-    this.props.onOpen()
+  // Set if card is showing front or back
+  setOpen(open) {
+    this.setState({ open })
+    if (open) {
+      this.props.onOpen()
+    } else {
+      this.props.onClose()
+    }
+    return this
   }
 
   // Is card showing front
@@ -60,14 +59,9 @@ export default class Card extends Component {
 
   // #### Enabling
 
-  // Makes card transparent
-  disable() {
-    this.setState({ enabled: false })
-  }
-
-  // Makes card opaque
-  enable() {
-    this.setState({ enabled: true })
+  setEnabled(enabled) {
+    this.setState({ enabled })
+    return this
   }
 
   // Is card opaque

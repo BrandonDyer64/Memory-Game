@@ -1,3 +1,7 @@
 {
-  "cards": 24
+  "cards": 24,
+  "startingScore": 10,
+  "matchPoints": 10,
+  "matchFailPoints": -1,
+  "cardClosePoints": -1
 }
