@@ -85,9 +85,6 @@ export default class Card extends Component {
           onClick={event => this.onManualToggle()}
         >
           <div className='flipper'>
-            {/*
-             *Back
-             */}
             <div className='flip-back'>
               <div className='card'>
                 <div className='card-back'>
@@ -95,28 +92,19 @@ export default class Card extends Component {
                 </div>
               </div>
             </div>
-            {/* /Back */}
-
-            {/*
-             * Front
-             */}
             <div className='flip-front'>
               <div className='card'>
                 <div className='card-front'>
-                  {/* Suit - Upper Left */}
                   <span className='suit' style={{ textAlign: 'left' }}>
                     {suit}
                   </span>
-                  {/* Card Value */}
                   <span style={{ fontSize: '2em' }}>{this.props.value}</span>
-                  {/* Suit - Lower Right */}
                   <span className='suit' style={{ textAlign: 'right' }}>
                     {suit}
                   </span>
                 </div>
               </div>
             </div>
-            {/* /Front */}
           </div>
         </div>
       </div>
