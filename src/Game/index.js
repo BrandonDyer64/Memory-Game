@@ -18,7 +18,7 @@ export default class Game extends Component {
       ...range(0, config.cards / 2)
     ]
     shuffleArray(cardNumbers)
-    this.state = { cardNumbers, score: 10 }
+    this.state = { cardNumbers, score: 10, isGameWon: false }
     this.cardCloseCallbacks = []
     window.openAllCards = () => {
       this.openAllCards()
@@ -35,7 +35,7 @@ export default class Game extends Component {
     setTimeout(() => {
       const cardNumbers = this.state.cardNumbers
       shuffleArray(cardNumbers)
-      this.setState({ cardNumbers, score: 10 })
+      this.setState({ cardNumbers, score: 10, isGameWon: false })
       this.numDisabledCards = 0
     }, 600)
   }
@@ -62,7 +62,6 @@ export default class Game extends Component {
       if (this.openCard == cardNum) {
         this.refs[cardNum].close()
         this.openCard = null
-        console.log('set null (same card)')
         return
       }
       const openCard = this.openCard
@@ -77,7 +76,7 @@ export default class Game extends Component {
           this.numDisabledCards += 2
 
           if (this.numDisabledCards >= config.cards) {
-            this.setState(state => ({ score: `${state.score} - Win!` }))
+            this.setState(state => ({ isGameWon: true }))
           }
         }, 1000)
       } else {
@@ -89,7 +88,6 @@ export default class Game extends Component {
           this.refs[openCard].close()
         }, 1000)
       }
-      console.log('set null')
       this.openCard = null
     } else {
       this.openCard = cardNum
@@ -98,9 +96,13 @@ export default class Game extends Component {
 
   onCardClosed(cardNum) {
     if (cardNum == this.openCard) this.openCard = null
-    if (!this.refs[cardNum].isEnabled()) return
+  }
 
-    this.setState(state => ({ score: Math.max(state.score - 1, 0) }))
+  onCardManuallyClosed(cardNum) {
+    this.onCardClosed(cardNum)
+    if (this.refs[cardNum].isEnabled()) {
+      this.setState(state => ({ score: Math.max(state.score - 1, 0) }))
+    }
   }
 
   getCards() {
@@ -114,6 +116,7 @@ export default class Game extends Component {
           rawValue={this.state.cardNumbers[i]}
           onOpen={() => this.onCardOpened(i)}
           onClose={() => this.onCardClosed(i)}
+          onManualClose={() => this.onCardManuallyClosed(i)}
         />
       )
     }
@@ -124,7 +127,11 @@ export default class Game extends Component {
   render() {
     return (
       <div className='game-board'>
-        <Navbar startOver={() => this.resetGame()} score={this.state.score} />
+        <Navbar
+          startOver={() => this.resetGame()}
+          score={this.state.score}
+          win={this.state.isGameWon}
+        />
         <div className='card-container'>{this.getCards()}</div>
         <div />
       </div>
