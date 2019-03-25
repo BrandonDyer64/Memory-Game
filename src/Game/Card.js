@@ -1,49 +1,71 @@
 import React, { Component } from 'react'
 import CardBackImage from './cardback.png'
 
-const symbols = ['♠', '♥', '♣', '♦']
+const suits = ['♠', '♥', '♣', '♦']
 
 export default class Card extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      symbol: symbols[props.rawValue % symbols.length]
+      suit: suits[props.rawValue % suits.length]
     }
+    this.suit = suits[this.props.rawValue % suits.length]
   }
 
-  // Opening
+  // #### Opening
+
+  // Opens or closes card
   toggle() {
-    this.refs.flipContainer.classList.toggle('flip-open')
+    this.classList().toggle('flip-open')
     if (this.isOpen()) {
       this.props.onOpen()
     } else {
+      this.props.onManualClose()
       this.props.onClose()
     }
   }
+
+  // Flips card to back
   close() {
-    this.refs.flipContainer.classList.remove('flip-open')
+    this.classList().remove('flip-open')
     this.props.onClose()
   }
+
+  // Flips card to front
   open() {
-    this.refs.flipContainer.classList.add('flip-open')
+    this.classList().add('flip-open')
     this.props.onOpen()
   }
+
+  // Is card showing front
   isOpen() {
-    return this.refs.flipContainer.classList.contains('flip-open')
+    return this.classList().contains('flip-open')
   }
 
-  // Enabling
+  // #### Enabling
+
+  // Makes card transparent
   disable() {
-    this.refs.flipContainer.classList.add('disable')
+    this.classList().add('disable')
   }
+
+  // Makes card opaque
   enable() {
-    this.refs.flipContainer.classList.remove('disable')
+    this.classList().remove('disable')
   }
+
+  // Is card opaque
   isEnabled() {
-    return !this.refs.flipContainer.classList.contains('disable')
+    return !this.classList().contains('disable')
+  }
+
+  // List of classes on the flip container
+  classList() {
+    return this.refs.flipContainer.classList
   }
 
   render() {
+    const suit = suits[this.props.rawValue % suits.length]
     return (
       <div style={{ margin: '10px' }}>
         <div
@@ -52,7 +74,9 @@ export default class Card extends Component {
           onClick={event => this.toggle()}
         >
           <div className='flipper'>
-            {/* Back */}
+            {/*
+             *Back
+             */}
             <div className='flip-back'>
               <div className='card'>
                 <div className='card-back'>
@@ -62,16 +86,21 @@ export default class Card extends Component {
             </div>
             {/* /Back */}
 
-            {/* Front */}
+            {/*
+             * Front
+             */}
             <div className='flip-front'>
               <div className='card'>
                 <div className='card-front'>
+                  {/* Suit - Upper Left */}
                   <span className='suit' style={{ textAlign: 'left' }}>
-                    {symbols[this.props.rawValue % symbols.length]}
+                    {suit}
                   </span>
+                  {/* Card Value */}
                   <span style={{ fontSize: '2em' }}>{this.props.value}</span>
+                  {/* Suit - Lower Right */}
                   <span className='suit' style={{ textAlign: 'right' }}>
-                    {symbols[this.props.rawValue % symbols.length]}
+                    {suit}
                   </span>
                 </div>
               </div>
