@@ -34,6 +34,8 @@ export default class Card extends Component {
 
   // When player opens or closes card
   onManualToggle() {
+    if (!this.isEnabled()) return // Card is disabled
+    // Toggle card
     this.toggle().then(isOpen => {
       if (!this.isOpen()) {
         this.props.onManualClose()
