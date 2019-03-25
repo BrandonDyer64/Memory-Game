@@ -12,7 +12,6 @@ import './Cards.css'
 export default class Game extends Component {
   constructor(props) {
     super(props)
-    const cards = []
     const cardNumbers = [
       ...range(0, config.cards / 2),
       ...range(0, config.cards / 2)
@@ -40,6 +39,7 @@ export default class Game extends Component {
     }, 600)
   }
 
+  // Flips all cards to back
   closeAllCards() {
     for (let i in this.refs) {
       setTimeout(() => {
@@ -49,24 +49,25 @@ export default class Game extends Component {
     }
   }
 
+  // Flips all cards to front
   openAllCards() {
     for (let i in this.refs) {
       this.refs[i].open()
     }
   }
 
+  // When a card is flipped to its front
   onCardOpened(cardNum) {
-    console.log(cardNum, this.openCard)
     if (!this.refs[cardNum].isEnabled()) return
     if (this.openCard != null) {
-      if (this.openCard == cardNum) {
+      if (this.openCard === cardNum) {
         this.refs[cardNum].close()
         this.openCard = null
         return
       }
       const openCard = this.openCard
       const cardNumbers = this.state.cardNumbers
-      if (cardNumbers[cardNum] == cardNumbers[openCard]) {
+      if (cardNumbers[cardNum] === cardNumbers[openCard]) {
         this.setState(state => ({
           score: state.score + 10
         }))
@@ -94,10 +95,12 @@ export default class Game extends Component {
     }
   }
 
+  // When a card is flipped to its back
   onCardClosed(cardNum) {
-    if (cardNum == this.openCard) this.openCard = null
+    if (cardNum === this.openCard) this.openCard = null
   }
 
+  // When a player flips a card to its back
   onCardManuallyClosed(cardNum) {
     this.onCardClosed(cardNum)
     if (this.refs[cardNum].isEnabled()) {
@@ -105,7 +108,8 @@ export default class Game extends Component {
     }
   }
 
-  getCards() {
+  render() {
+    // Render Cards
     const cards = []
     for (let i = 0; i < config.cards; i++) {
       cards.push(
@@ -120,11 +124,8 @@ export default class Game extends Component {
         />
       )
     }
-    this.cards = cards
-    return cards
-  }
 
-  render() {
+    // Render Body
     return (
       <div className='game-board'>
         <Navbar
@@ -132,7 +133,7 @@ export default class Game extends Component {
           score={this.state.score}
           win={this.state.isGameWon}
         />
-        <div className='card-container'>{this.getCards()}</div>
+        <div className='card-container'>{cards}</div>
         <div />
       </div>
     )

@@ -7,61 +7,72 @@ export default class Card extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      suit: suits[props.rawValue % suits.length]
+      open: false,
+      enabled: true
     }
-    this.suit = suits[this.props.rawValue % suits.length]
   }
 
   // #### Opening
 
   // Opens or closes card
   toggle() {
-    this.classList().toggle('flip-open')
-    if (this.isOpen()) {
-      this.props.onOpen()
-    } else {
-      this.props.onManualClose()
-      this.props.onClose()
-    }
+    return new Promise((resolve, reject) => {
+      this.setState(
+        state => ({ open: !state.open }),
+        () => {
+          if (this.isOpen()) {
+            this.props.onOpen()
+            resolve(true)
+          } else {
+            this.props.onClose()
+            resolve(false)
+          }
+        }
+      )
+    })
+  }
+
+  // When player opens or closes card
+  onManualToggle() {
+    this.toggle().then(isOpen => {
+      if (!this.isOpen()) {
+        this.props.onManualClose()
+      }
+    })
   }
 
   // Flips card to back
   close() {
-    this.classList().remove('flip-open')
+    this.setState({ open: false })
     this.props.onClose()
   }
 
   // Flips card to front
   open() {
-    this.classList().add('flip-open')
+    this.setState({ open: true })
     this.props.onOpen()
   }
 
   // Is card showing front
   isOpen() {
-    return this.classList().contains('flip-open')
+    return this.state.open
   }
 
   // #### Enabling
 
   // Makes card transparent
   disable() {
-    this.classList().add('disable')
+    this.setState({ enabled: false })
   }
 
   // Makes card opaque
   enable() {
-    this.classList().remove('disable')
+    this.setState({ enabled: true })
   }
 
   // Is card opaque
   isEnabled() {
-    return !this.classList().contains('disable')
-  }
-
-  // List of classes on the flip container
-  classList() {
-    return this.refs.flipContainer.classList
+    return this.state.enabled
   }
 
   render() {
@@ -69,9 +80,13 @@ export default class Card extends Component {
     return (
       <div style={{ margin: '10px' }}>
         <div
-          className='flip-container'
+          className={
+            'flip-container' +
+            (this.state.open ? ' flip-open' : '') +
+            (this.state.enabled ? '' : ' disable')
+          }
           ref='flipContainer'
-          onClick={event => this.toggle()}
+          onClick={event => this.onManualToggle()}
         >
           <div className='flipper'>
             {/*
@@ -80,7 +95,7 @@ export default class Card extends Component {
             <div className='flip-back'>
               <div className='card'>
                 <div className='card-back'>
-                  <img src={CardBackImage} />
+                  <img src={CardBackImage} alt='Card back' />
                 </div>
               </div>
             </div>
