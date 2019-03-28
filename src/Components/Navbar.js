@@ -1,5 +1,6 @@
 import React from 'react'
-import Button from '../Components/Button'
+import Button from './Button'
+import ForkMe from './ForkMe'
 
 import './Navbar.css'
 
@@ -11,6 +12,7 @@ export default props => {
         Score: {props.score}
         {props.win ? ' - You Win!' : ''}
       </span>
+      <ForkMe />
     </nav>
   )
 }
