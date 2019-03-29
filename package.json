@@ -1,5 +1,5 @@
 {
-  "name": "grhomework",
+  "name": "memorygame",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,7 +7,7 @@
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"
   },
-  "homepage": "https://brandondyer64.github.io/grhomework",
+  "homepage": "https://brandondyer64.github.io/Memory-Game",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
