@@ -13,18 +13,15 @@ interface Props {
 export default (props: Props) => {
     const styles = useStyles({});
 
+    const [disabledCards, setDisabledCards] = useState<number[]>([]);
+    const [openCardA, setOpenCardA] = useState(-1);
+    const [openCardB, setOpenCardB] = useState(-1);
     const [cards] = useState<number[]>(() =>
         shuffleArray([
             ...range(0, props.numCards / 2),
             ...range(0, props.numCards / 2),
         ])
     );
-
-    const [disabledCards, setDisabledCards] = useState<number[]>([]);
-    const disableCard = (card: number) => setDisabledCards(c => [...c, card]);
-
-    const [openCardA, setOpenCardA] = useState(-1);
-    const [openCardB, setOpenCardB] = useState(-1);
 
     if (disabledCards.length >= cards.length) {
         props.onWin();
@@ -38,8 +35,7 @@ export default (props: Props) => {
         } else if (openCardB < 0) {
             setOpenCardB(card);
             if (cards[card] === cards[openCardA]) {
-                disableCard(card);
-                disableCard(openCardA);
+                setDisabledCards(c => [...c, card, openCardA]);
                 props.onMatch();
             } else {
                 props.onFail();
@@ -50,17 +46,19 @@ export default (props: Props) => {
         }
     };
 
-    const cardComponents = cards.map((card, i) => (
-        <Card
-            value={card}
-            isOpen={i === openCardA || i === openCardB}
-            isEnabled={!disabledCards.includes(i)}
-            onClick={() => onCardOpen(i)}
-            key={i}
-        />
-    ));
-
-    return <div className={styles.root}>{cardComponents}</div>;
+    return (
+        <div className={styles.root}>
+            {cards.map((card, i) => (
+                <Card
+                    value={card}
+                    isOpen={i === openCardA || i === openCardB}
+                    isEnabled={!disabledCards.includes(i)}
+                    onClick={() => onCardOpen(i)}
+                    key={i}
+                />
+            ))}
+        </div>
+    );
 };
 
 export const useStyles = makeStyles({

@@ -58,11 +58,10 @@ export const useStyles = makeStyles({
             cursor: "pointer",
         },
         "& $back, & $front": {
-            background: "#fff8",
+            background: "#ffff",
             borderRadius: "1vh",
-            backdropFilter: "blur(10px)",
             padding: "1vh",
-            //backfaceVisibility: "hidden",
+            backfaceVisibility: "hidden",
             position: "absolute",
             top: 0,
             left: 0,
